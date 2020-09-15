@@ -2,7 +2,12 @@ import { Route, Redirect } from 'react-router-dom';
 import { BrowserRouter as Router } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 
+//Mods
+import Login from "./auth/Login"
+import Register from "./auth/Register"
+
 const ApplicationViews = props => {
+    let props_reference = props
 
     return (
     <>
@@ -10,6 +15,16 @@ const ApplicationViews = props => {
                 exact path="/" render={props => {
                     return <p>GG</p>
                 }} />
+                <Route
+                exact path="/register" render={props => {
+                    return <Register {...props_reference} />
+                }}
+            />
+            <Route
+                exact path="/login" render={props => {
+                    return <Login {...props_reference} />
+                }}
+            />
     </>
     )
 }
