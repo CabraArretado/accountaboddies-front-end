@@ -1,4 +1,4 @@
-const remoteURL = "http://localhost:3000"
+const remoteURL = "http://localhost:8000"
 
 
 // General API manager, first parameter always the list name in lower case
@@ -76,8 +76,15 @@ export default {
     },
 
     // Get a obj in list with two specificities
-    async getWhereAnd(list, key, value, key2, value2) {
-        let data = await fetch(`${remoteURL}/${list}?${key}=${value}&${key2}=${value2}`)
+    async getCustom(list, custom_string) {
+        let data = await fetch(`${remoteURL}/${list}?${custom_string}`, {
+            method: "GET",
+            "headers": {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+                "Authorization": `Token ${localStorage.getItem("accountaboddies_token")}`
+            },
+        })
         data = data.json()
         return data
     },

@@ -11,7 +11,6 @@ const Register = props => {
     
     
     const register = props.auth.register
-    console.log(props)
 
     const handleRegister = (e) => {
         e.preventDefault()
@@ -23,6 +22,7 @@ const Register = props => {
         }
 
         register(newUser).then(() => {
+            console.log(newUser)
             props.history.push({
                 pathname: "/"
             })
