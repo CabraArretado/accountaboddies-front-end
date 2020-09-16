@@ -8,6 +8,7 @@ import Register from "./auth/Register"
 
 const ApplicationViews = props => {
     let props_reference = props
+    console.log("ApplicationViews props: ", props_reference)
 
     return (
     <>

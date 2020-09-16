@@ -11,10 +11,10 @@ const Register = props => {
     
     
     const register = props.auth.register
+    console.log(props)
 
     const handleRegister = (e) => {
         e.preventDefault()
-        props.setIsCurrentUser(false)
         const newUser = {
             "first_name": firstName.current.value,
             "last_name": lastName.current.value,
@@ -23,7 +23,6 @@ const Register = props => {
         }
 
         register(newUser).then(() => {
-            props.setIsCurrentUser(true)
             props.history.push({
                 pathname: "/"
             })
@@ -33,7 +32,7 @@ const Register = props => {
     return (
         <main style={{ textAlign: "center" }}>
             <form className="form--login" onSubmit={handleRegister}>
-                <h1 className="h3 mb-3 font-weight-normal">Register to use Bangazon</h1>
+                <h1 className="h3 mb-3 font-weight-normal">Register to use Accontaboddies</h1>
                 <fieldset>
                     <label htmlFor="inputEmail"> Email</label>
                     <input ref={email} type="email"
@@ -57,14 +56,6 @@ const Register = props => {
                         className="form-control"
                         placeholder="Last name"
                         required />
-                </fieldset>
-                <fieldset>
-                    <label htmlFor="inputEmail"> Email address </label>
-                    <input ref={email} type="email"
-                        name="email"
-                        className="form-control"
-                        placeholder="Email address"
-                        required  autoFocus/>
                 </fieldset>
                 <fieldset>
                     <label htmlFor="inputPassword"> Password </label>

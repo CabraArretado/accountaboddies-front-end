@@ -3,7 +3,8 @@ import { useHistory } from "react-router-dom"
 
 // Login Working
 const Login = props => {
-    const login = props.auth.login
+    let props_reference = props.auth
+    const login = props_reference.login
 
     const email = useRef()
     const password = useRef()
@@ -17,7 +18,6 @@ const Login = props => {
     // Simplistic handler for login submit
     const handleLogin = (e) => {
         e.preventDefault()
-
         const credentials = {
             "email": email.current.value,
             "password": password.current.value
@@ -26,7 +26,6 @@ const Login = props => {
 
         login(credentials)
             .then(() => {
-                props.setIsCurrentUser(true)
                 back()
             })
     }
