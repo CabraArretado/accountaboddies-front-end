@@ -15,7 +15,7 @@ const NavBar = props => {
 
     return <>
         <nav className="navbar navbar-expand-lg navbar-light bg-light">
-            <a className="navbar-brand" href="/login">Accontaboddies</a>
+            <a className="navbar-brand" href="/">Accontaboddies</a>
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
@@ -44,13 +44,14 @@ const NavBar = props => {
                     </li>
                 </ul>
                 <form className="form-inline my-2 my-lg-0">
-                    { isAuthenticated() ?  
-                    <button className="btn btn-outline-warning my-2 my-sm-0 mx-2" type="submit" onClick={handleLogout}>Logout</button> 
-                    :
-                     <>
-                    <button className="btn btn-outline-success my-2 my-sm-0 mx-2" type="submit">Login</button>
-                    <button className="btn btn-outline-success my-2 my-sm-0 mx-2" type="submit">Register</button>
-                    </>
+                    {
+                        isAuthenticated() ?
+                        <button className="btn btn-outline-warning my-2 my-sm-0 mx-2" type="submit" onClick={handleLogout}>Logout</button>
+                        :
+                        <>
+                            <Link to="/login"><button className="btn btn-outline-success my-2 my-sm-0 mx-2" type="submit">Login</button></Link>
+                            <Link to="/register"><button className="btn btn-outline-success my-2 my-sm-0 mx-2" type="submit">Register</button></Link>
+                        </>
                     }
                 </form>
             </div>

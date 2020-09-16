@@ -66,7 +66,7 @@ function App() {
         <>
             <Router>
                 <Route render={props => (
-                    <NavBar setIsLoggedIn={setIsLoggedIn} auth={auth} />
+                    <NavBar setIsLoggedIn={setIsLoggedIn} auth={auth} {...props} />
                 )} />
                 <div className="container" >
                     <ApplicationViews auth={auth} loggedIn={loggedIn} />
