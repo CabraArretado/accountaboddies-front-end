@@ -9,9 +9,11 @@ import Home from "./Home/Home"
 import Groups from "./Group/Groups"
 import CreateGroup from "./Group/CreateGroup"
 import GroupPage from "./Group/GroupPage"
+import MyGroups from "./Group/MyGroups"
 
 const ApplicationViews = props => {
     let props_reference = props
+    let myGroups = 
     console.log("ApplicationViews props: ", props_reference)
 
     return (
@@ -33,6 +35,11 @@ const ApplicationViews = props => {
             <Route
                 exact path="/groups" render={props => {
                     return <Groups {...props_reference} />
+                }}
+            />
+            <Route
+                exact path="/my_groups" render={props => {
+                    return <MyGroups {...props_reference} myGroups={props_reference.myGroups} />
                 }}
             />
             <Route

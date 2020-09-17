@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import ApplicationViews from './components/ApplicationViews';
@@ -63,6 +63,22 @@ function App() {
 
     const [myGroups, setMyGroups] = useState([]) // Groups user is in
 
+    const getMyGroups = async () => {
+        let i = await fetch(`http://127.0.0.1:8000/group?my_groups=true`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("accountaboddies_token")}`
+            }
+        }).then(res => res.json())
+        setMyGroups(i)
+    }
+
+    useEffect(()=>{
+        getMyGroups()
+    }, [])
+
 
 
 
@@ -70,10 +86,10 @@ function App() {
         <>
             <Router>
                 <Route render={props => (
-                    <NavBar setIsLoggedIn={setIsLoggedIn} auth={auth} {...props} myGroups={myGroups} setMyGroups={setMyGroups}/>
+                    <NavBar setIsLoggedIn={setIsLoggedIn} auth={auth} {...props} myGroups={myGroups}/>
                 )} />
                 <div className="container" >
-                    <ApplicationViews auth={auth} loggedIn={loggedIn} myGroups={myGroups}/>
+                    <ApplicationViews auth={auth} loggedIn={loggedIn} myGroups={myGroups} getMyGroups={getMyGroups}/>
                 </div>
             </Router>
         </>

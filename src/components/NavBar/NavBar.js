@@ -26,6 +26,9 @@ const NavBar = props => {
                         <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
                     </li>
                     <li className="nav-item">
+                        <Link className="nav-link" to="/my_groups">My Groups</Link>
+                    </li>
+                    <li className="nav-item">
                         <Link className="nav-link" to="/groups">Groups</Link>
                     </li>
                     <li className="nav-item dropdown">
