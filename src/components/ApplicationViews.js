@@ -5,6 +5,9 @@ import React, { useState, useEffect } from 'react';
 //Mods
 import Login from "./auth/Login"
 import Register from "./auth/Register"
+import Home from "./Home/Home"
+import Groups from "./Group/Groups"
+import CreateGroup from "./Group/CreateGroup"
 
 const ApplicationViews = props => {
     let props_reference = props
@@ -14,7 +17,7 @@ const ApplicationViews = props => {
     <>
             <Route
                 exact path="/" render={props => {
-                    return <p>GG</p>
+                    return <Home {...props}/>
                 }} />
                 <Route
                 exact path="/register" render={props => {
@@ -24,6 +27,16 @@ const ApplicationViews = props => {
             <Route
                 exact path="/login" render={props => {
                     return <Login {...props_reference} />
+                }}
+            />
+            <Route
+                exact path="/groups" render={props => {
+                    return <Groups {...props_reference} />
+                }}
+            />
+            <Route
+                exact path="/create_group" render={props => {
+                    return <CreateGroup {...props_reference} />
                 }}
             />
     </>

@@ -11,7 +11,7 @@ function App() {
 
     // AUTHENTICATION FEATURES
     // ALL AUTHENTICATION FEATURES (BUT STATES) MUST BE PASSED HERE INSIDE THE auth DICT
-    const [loggedIn, setIsLoggedIn] = useState(false)
+    const [loggedIn, setIsLoggedIn] = useState(localStorage.getItem("accountaboddies_token") !== null)
 
     const auth = {
         isAuthenticated: () => {
@@ -66,7 +66,7 @@ function App() {
         <>
             <Router>
                 <Route render={props => (
-                    <NavBar setIsLoggedIn={setIsLoggedIn} auth={auth} />
+                    <NavBar setIsLoggedIn={setIsLoggedIn} auth={auth} {...props} />
                 )} />
                 <div className="container" >
                     <ApplicationViews auth={auth} loggedIn={loggedIn} />
