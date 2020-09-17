@@ -8,6 +8,7 @@ import Register from "./auth/Register"
 import Home from "./Home/Home"
 import Groups from "./Group/Groups"
 import CreateGroup from "./Group/CreateGroup"
+import GroupPage from "./Group/GroupPage"
 
 const ApplicationViews = props => {
     let props_reference = props
@@ -37,6 +38,11 @@ const ApplicationViews = props => {
             <Route
                 exact path="/create_group" render={props => {
                     return <CreateGroup {...props_reference} />
+                }}
+            />
+            <Route
+                exact path="/groups/:groupId(\d+)" render={props => {
+                    return <GroupPage groupId={parseInt(props.match.params.groupId)} {...props} />
                 }}
             />
     </>

@@ -10,7 +10,7 @@ import './App.css';
 function App() {
 
     // AUTHENTICATION FEATURES
-    // ALL AUTHENTICATION FEATURES (BUT STATES) MUST BE PASSED HERE INSIDE THE auth DICT
+    // ALL AUTHENTICATION FEATURES (BUT STATES) MUST BE PASSED HERE INSIDE THE auth obj
     const [loggedIn, setIsLoggedIn] = useState(localStorage.getItem("accountaboddies_token") !== null)
 
     const auth = {
@@ -61,15 +61,19 @@ function App() {
     }
     ////////////////////////////////////////////////////////////////////////////////////
 
+    const [myGroups, setMyGroups] = useState([]) // Groups user is in
+
+
+
 
     return (
         <>
             <Router>
                 <Route render={props => (
-                    <NavBar setIsLoggedIn={setIsLoggedIn} auth={auth} {...props} />
+                    <NavBar setIsLoggedIn={setIsLoggedIn} auth={auth} {...props} myGroups={myGroups} setMyGroups={setMyGroups}/>
                 )} />
                 <div className="container" >
-                    <ApplicationViews auth={auth} loggedIn={loggedIn} />
+                    <ApplicationViews auth={auth} loggedIn={loggedIn} myGroups={myGroups}/>
                 </div>
             </Router>
         </>
