@@ -15,11 +15,12 @@ const GroupPage = (props) => {
         setGroup(groupQuery)
     }
 
-    useEffect(()=>{getGroup()}, [group])
+    useEffect(()=>{getGroup()},[])
 
     return <>
         <div className="container">
             <h1>{group.title}</h1>
+            <h5>Created by: {group.created_by} in {group.created_at}</h5>
             <h4>{group.description}</h4>
             <h3>{group.population}/{group.size}</h3>
         </div>
