@@ -27,9 +27,6 @@ const CreateGroup = props => {
 
     }
     
-
-    
-    
     const handleGroup = (e) => {
         e.preventDefault()
 
