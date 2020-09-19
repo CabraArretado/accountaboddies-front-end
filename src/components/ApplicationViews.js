@@ -39,7 +39,7 @@ const ApplicationViews = props => {
             />
             <Route
                 exact path="/my_groups" render={props => {
-                    return <MyGroups {...props_reference} myGroups={props_reference.myGroups} />
+                    return <MyGroups {...props_reference} getMyGroups={props_reference.getMyGroups} myGroups={props_reference.myGroups} />
                 }}
             />
             <Route

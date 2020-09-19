@@ -61,10 +61,15 @@ function App() {
     }
     ////////////////////////////////////////////////////////////////////////////////////
 
-    const [myGroups, setMyGroups] = useState([]) // Groups user is in
+    const [myGroups, setMyGroups] = useState([]) // Array if groups the user participate currently
+
 
     const getMyGroups = async () => {
-        let i = await fetch(`http://127.0.0.1:8000/group?my_groups=true`, {
+        /*
+        If user is authenticated call the server to see which is the user in and set the myGroups with a answer, else change myGroup to empty array
+        */
+        if (auth.isAuthenticated()){
+        let api_call = await fetch(`http://127.0.0.1:8000/group?my_groups=true`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -72,12 +77,15 @@ function App() {
                 "Authorization": `Token ${localStorage.getItem("accountaboddies_token")}`
             }
         }).then(res => res.json())
-        setMyGroups(i)
+        setMyGroups(api_call)
+        } else {
+            setMyGroups([])
+        }        
     }
 
     useEffect(()=>{
         getMyGroups()
-    }, [])
+    }, [loggedIn])
 
 
 
