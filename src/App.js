@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { Route } from 'react-router-dom';
 import ApplicationViews from './components/ApplicationViews';
@@ -10,7 +10,7 @@ import './App.css';
 function App() {
 
     // AUTHENTICATION FEATURES
-    // ALL AUTHENTICATION FEATURES (BUT STATES) MUST BE PASSED HERE INSIDE THE auth DICT
+    // ALL AUTHENTICATION FEATURES (BUT STATES) MUST BE PASSED HERE INSIDE THE auth obj
     const [loggedIn, setIsLoggedIn] = useState(localStorage.getItem("accountaboddies_token") !== null)
 
     const auth = {
@@ -61,15 +61,43 @@ function App() {
     }
     ////////////////////////////////////////////////////////////////////////////////////
 
+    const [myGroups, setMyGroups] = useState([]) // Array if groups the user participate currently
+
+
+    const getMyGroups = async () => {
+        /*
+        If user is authenticated call the server to see which is the user in and set the myGroups with a answer, else change myGroup to empty array
+        */
+        if (auth.isAuthenticated()){
+        let api_call = await fetch(`http://127.0.0.1:8000/group?my_groups=true`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${localStorage.getItem("accountaboddies_token")}`
+            }
+        }).then(res => res.json())
+        setMyGroups(api_call)
+        } else {
+            setMyGroups([])
+        }        
+    }
+
+    useEffect(()=>{
+        getMyGroups()
+    }, [loggedIn])
+
+
+
 
     return (
         <>
             <Router>
                 <Route render={props => (
-                    <NavBar setIsLoggedIn={setIsLoggedIn} auth={auth} {...props} />
+                    <NavBar setIsLoggedIn={setIsLoggedIn} auth={auth} {...props} myGroups={myGroups}/>
                 )} />
                 <div className="container" >
-                    <ApplicationViews auth={auth} loggedIn={loggedIn} />
+                    <ApplicationViews auth={auth} loggedIn={loggedIn} myGroups={myGroups} getMyGroups={getMyGroups}/>
                 </div>
             </Router>
         </>
