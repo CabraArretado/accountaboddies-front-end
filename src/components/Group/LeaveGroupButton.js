@@ -5,7 +5,7 @@ import {getMyGroups} from "../../App"
 
 import API from "../../modules/data_module"
 
-const JoinGroupButton = React.memo(props =>{
+const LeaveGroupButton = React.memo(props =>{
     const getMyGroups = props.getMyGroups
     const groupId = props.groupId
     const [isLoading, setIsLoading] = useState(false)
@@ -28,4 +28,4 @@ const JoinGroupButton = React.memo(props =>{
 }
 )
 
-export default JoinGroupButton
+export default LeaveGroupButton

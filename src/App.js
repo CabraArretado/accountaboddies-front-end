@@ -80,7 +80,7 @@ function App() {
         setMyGroups(api_call)
         } else {
             setMyGroups([])
-        }        
+        }
     }
 
     useEffect(()=>{
