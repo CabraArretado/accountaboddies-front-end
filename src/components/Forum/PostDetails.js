@@ -4,14 +4,15 @@ import { Button, Form, Input, FormGroup } from 'reactstrap';
 
 import API from "../../modules/data_module"
 import CommentaryBox from "./CommentaryBox"
+import NewCommentaryButton from "./NewCommentaryButton"
 
 // moods
 
 const PostDetails = (props) => {
     let groupId = props.groupId
     let postId = props.postId
-    const [ commentaries, setCommentaries ] = useState({})
-    const [ post, setPost ] = useState()
+    const [ commentaries, setCommentaries ] = useState([])
+    const [ post, setPost ] = useState({"title":"", "created_by": "", "created_at": "", "description":""})
 
     const getPost = async () => {
         const query = await API.get("forum_post", postId)
@@ -33,12 +34,13 @@ const PostDetails = (props) => {
     return <>
         <div className="container">
             <h1>{post.title}</h1>
-            <h5>POsted by: {post.created_by} in {post.created_at}</h5>
+            <h5>Posted by: {post.created_by.first_name} in {post.created_at}</h5>
             <h4>{post.description}</h4>
         </div>
         <div>
-            { commentaries.map((commentary) => <CommentaryBox commentary={commentary} key={commentary.id} />) }
+            { commentaries.map(commentary => <CommentaryBox commentary={commentary} key={commentary.id} />) }
         </div>
+        <NewCommentaryButton postId={postId} groupId={groupId} />
     </>
 };
 
