@@ -60,8 +60,11 @@ function App() {
         }
     }
     ////////////////////////////////////////////////////////////////////////////////////
+    ///////////////////////////////////////////////////////////////////////////////////
+    /* Group Authentication */
 
-    const [myGroups, setMyGroups] = useState([]) // Array if groups the user participate currently
+    const [myGroups, setMyGroups] = useState([]) // Array w/ groups the user participate currently
+    const [myGroupsId, setMyGroupsId] = useState([]) // Array w/ the ids of the groups user participate currently
 
 
     const getMyGroups = async () => {
@@ -84,8 +87,18 @@ function App() {
     }
 
     useEffect(()=>{
+        /*
+        Update MyGroup if the user login or logout
+        */
         getMyGroups()
     }, [loggedIn])
+
+    useEffect(()=>{
+        /*
+        Just changes the MyGroupsId to the current group set
+        */
+        setMyGroupsId(myGroups.map(group => group.id))
+    }, [myGroups])
 
 
 
@@ -97,7 +110,7 @@ function App() {
                     <NavBar setIsLoggedIn={setIsLoggedIn} auth={auth} {...props} myGroups={myGroups}/>
                 )} />
                 <div className="container" >
-                    <ApplicationViews auth={auth} loggedIn={loggedIn} myGroups={myGroups} getMyGroups={getMyGroups}/>
+                    <ApplicationViews auth={auth} loggedIn={loggedIn} myGroups={myGroups} getMyGroups={getMyGroups} myGroupsId={myGroupsId}/>
                 </div>
             </Router>
         </>

@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { Button, Form, Input, FormGroup } from 'reactstrap';
 
 import API from "../../modules/data_module"
+import CommentaryBox from "./CommentaryBox"
 
 // moods
 
@@ -34,6 +35,9 @@ const PostDetails = (props) => {
             <h1>{post.title}</h1>
             <h5>POsted by: {post.created_by} in {post.created_at}</h5>
             <h4>{post.description}</h4>
+        </div>
+        <div>
+            { commentaries.map((commentary) => <CommentaryBox commentary={commentary} key={commentary.id} />) }
         </div>
     </>
 };

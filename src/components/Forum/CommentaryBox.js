@@ -6,19 +6,19 @@ import API from "../../modules/data_module"
 
 // moods
 
-const PostBox = (props) => {
+const CommentaryBox = (props) => {
 
     let post = props.post
-
+    const commentary = props.commentary
     //TODO: formate the date
 
 
     return <>
-        <div className="container">
-            <Link to="/"><h1>{post.title}</h1></Link>
-            <h4>{post.description}</h4>
+        <div className="">
+            <Link to="/"><h1>{commentary.title}</h1></Link>
+            <h4>{commentary.content}</h4>
         </div>
     </>
 };
 
-export default PostBox;
+export default CommentaryBox;

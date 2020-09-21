@@ -14,11 +14,13 @@ import ForumMain from "./Forum/ForumMain"
 import NewPostForm from "./Forum/NewPostForm"
 
 const ApplicationViews = props => {
-    let props_reference = props
-    let myGroups = props.myGroups
-
-        const GroupsIds = myGroups.map(group => group.id)
-        console.log(GroupsIds)
+    const props_reference = props
+    const myGroups = props.myGroups
+    const myGroupsId = props.myGroupsId
+    /*
+    TODO:
+    - Access the group member only area: Got the check if the groupId requested is present in the myGroupsId array else redirect to sorry page
+    */
 
     return (
     <>
@@ -58,21 +60,33 @@ const ApplicationViews = props => {
             />
             <Route
                 exact path="/forum/:groupId(\d+)" render={props => {
-                    console.log(parseInt(props.match.params.groupId))
+                    let groupId = parseInt(props.match.params.groupId)
+                    
+                    if(myGroupsId.includes(groupId)){
                     return <ForumMain  {...props_reference} groupId={parseInt(props.match.params.groupId)}/>
+                    }
+                    else{ return <Redirect to="/" /> }
                 }}
             />
             <Route
                 exact path="/forum/:groupId(\d+)/:postId(\d+)" render={props => {
-                    console.log(parseInt(props.match.params.groupId))
+                    let groupId = parseInt(props.match.params.groupId)
+                    
+                    if(myGroupsId.includes(groupId)){
                     return <ForumMain  {...props_reference} groupId={parseInt(props.match.params.groupId)} postId={parseInt(props.match.params.postId) }/>
+                    } else { return <Redirect to="/" /> } 
                 }}
             />
             <Route
                 exact path="/forum/:groupId(\d+)/new_post" render={props => {
                     let groupId = parseInt(props.match.params.groupId)
+
                     // To check if the user is on the group before he be able to access
-                    return <NewPostForm  {...props_reference} groupId={parseInt(props.match.params.groupId)}/>
+                    if(myGroupsId.includes(groupId)){
+                        return <NewPostForm  {...props_reference} groupId={parseInt(props.match.params.groupId)}/>
+                    } else {
+                        return <Redirect to="/" />
+                    }
                 }}
             />
     </>

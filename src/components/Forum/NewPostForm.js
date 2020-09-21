@@ -2,15 +2,26 @@ import React, { useRef } from "react"
 import { useHistory } from "react-router-dom"
 import { Button, Form, Input, FormGroup } from 'reactstrap';
 
+import API from "../../modules/data_module"
 
 // Login Working
 const NewPostForm = props => {
+    let groupId = props.groupId
 
     const title = useRef()
     const content = useRef()
 
-    const handlePost = () => {
-
+    const handlePost = async () => {
+        const newPost = {
+            title: title.current.value,
+            content: content.current.value,
+            group: groupId
+        }
+        let posted = await API.post("forum_post", newPost)
+        props.history.push({
+            // Need to push to the post link
+            pathname: "/"
+        })
     }
 
     return (
