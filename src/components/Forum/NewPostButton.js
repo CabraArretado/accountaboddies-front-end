@@ -11,12 +11,8 @@ const NewPostButton = React.memo(props =>{
 
     const [isLoading, setIsLoading] = useState(false)
 
-    const handleNewPost = async () => {
-        return <Redirect to={`/group=${groupId}/new_post`} />
-    }
-
     return <>
-        <Link to={`/group=${groupId}/new_post`}> <Button>Create New Post</Button> </Link>
+        <Link to={`/forum/group=${groupId}/new_post`}> <Button>Create New Post</Button> </Link>
     </>
 }
 )

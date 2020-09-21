@@ -11,6 +11,7 @@ import CreateGroup from "./Group/CreateGroup"
 import GroupPage from "./Group/GroupPage"
 import MyGroups from "./Group/MyGroups"
 import ForumMain from "./Forum/ForumMain"
+import PostDetails from "./Forum/PostDetails"
 import NewPostForm from "./Forum/NewPostForm"
 
 const ApplicationViews = props => {
@@ -68,20 +69,23 @@ const ApplicationViews = props => {
                     else{ return <Redirect to="/" /> }
                 }}
             />
+
+            {/* Router for: Forum Post Details */}
             <Route
                 exact path="/forum/:groupId(\d+)/:postId(\d+)" render={props => {
                     let groupId = parseInt(props.match.params.groupId)
                     
                     if(myGroupsId.includes(groupId)){
-                    return <ForumMain  {...props_reference} groupId={parseInt(props.match.params.groupId)} postId={parseInt(props.match.params.postId) }/>
+                    return <PostDetails  {...props_reference} groupId={parseInt(props.match.params.groupId)} postId={parseInt(props.match.params.postId) }/>
                     } else { return <Redirect to="/" /> } 
                 }}
             />
+
+            {/* Router for: Forum New Post */}
             <Route
-                exact path="/forum/:groupId(\d+)/new_post" render={props => {
+                exact path="/forum/group=:groupId(\d+)/new_post" render={props => {
                     let groupId = parseInt(props.match.params.groupId)
 
-                    // To check if the user is on the group before he be able to access
                     if(myGroupsId.includes(groupId)){
                         return <NewPostForm  {...props_reference} groupId={parseInt(props.match.params.groupId)}/>
                     } else {

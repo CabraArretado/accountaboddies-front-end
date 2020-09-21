@@ -1,6 +1,6 @@
 import React, { useRef } from "react"
-import { useHistory } from "react-router-dom"
-import { Button, Form, Input, FormGroup } from 'reactstrap';
+import { useHistory, withRouter } from "react-router-dom"
+import { Button, Form, FormGroup } from 'reactstrap';
 
 import API from "../../modules/data_module"
 
@@ -11,16 +11,18 @@ const NewPostForm = props => {
     const title = useRef()
     const content = useRef()
 
-    const handlePost = async () => {
+    const handlePost = async (e) => {
+        e.preventDefault()
+        console.log(title.current.value)
         const newPost = {
-            title: title.current.value,
-            content: content.current.value,
-            group: groupId
+            "title": title.current.value,
+            "content": content.current.value,
+            "group": groupId
         }
         let posted = await API.post("forum_post", newPost)
         props.history.push({
             // Need to push to the post link
-            pathname: "/"
+            pathname: `/forum/${groupId}/${posted.id}`
         })
     }
 
@@ -30,14 +32,14 @@ const NewPostForm = props => {
                 <h1 className="h3 mb-3 font-weight-normal">New Forum Post</h1>
                 <fieldset>
                     <label htmlFor="inputTitle"> Title </label>
-                    <Input ref={title} type="text"
+                    <input ref={title} type="text"
                         className="form-control"
                         placeholder="Email"
                         required autoFocus />
                 </fieldset>
                 <fieldset>
                     <label htmlFor="inputContent"> Content </label>
-                    <Input ref={content} type="text"
+                    <input ref={content} type="text"
                         id="password"
                         className="form-control"
                         placeholder="Content"
@@ -53,4 +55,4 @@ const NewPostForm = props => {
     )
 }
 
-export default NewPostForm
+export default withRouter(NewPostForm)
