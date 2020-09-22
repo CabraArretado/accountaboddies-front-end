@@ -12,6 +12,8 @@ const NewCommentaryButton = React.memo(props =>{
     let groupId = props.groupId
     let postId = props.postId
 
+    let getCommentaries = props.getCommentaries
+
     const [isLoading, setIsLoading] = useState(false)
     const [isOpen, setIsOpen] = useState(false)
     const trigger = () => {
@@ -20,7 +22,7 @@ const NewCommentaryButton = React.memo(props =>{
 
     return <>
         <button onClick={trigger}>New Commentary</button>
-        { isOpen ? <NewCommentaryForm postId={postId} groupId={groupId} /> : null }
+        { isOpen ? <NewCommentaryForm postId={postId} trigger={trigger} groupId={groupId} getCommentaries={getCommentaries}/> : null }
     </>
 }
 )

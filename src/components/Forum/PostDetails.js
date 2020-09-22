@@ -20,13 +20,14 @@ const PostDetails = (props) => {
     }
 
     const getCommentaries = async () => {
-        const list = await API.getCustom("forum_post", `post=${postId}`);
+        const list = await API.getCustom("forum_commentary", `post=${postId}`);
         setCommentaries(list)
+        console.log()
     }
 
     useEffect(()=>{
         getPost()
-        getCommentaries()
+        getCommentaries(commentaries)
     },[])
 
     //TODO: formate the date
@@ -40,7 +41,7 @@ const PostDetails = (props) => {
         <div>
             { commentaries.map(commentary => <CommentaryBox commentary={commentary} key={commentary.id} />) }
         </div>
-        <NewCommentaryButton postId={postId} groupId={groupId} />
+        <NewCommentaryButton postId={postId} groupId={groupId} getCommentaries={getCommentaries} />
     </>
 };
 

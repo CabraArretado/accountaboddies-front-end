@@ -15,7 +15,8 @@ const CommentaryBox = (props) => {
 
     return <>
         <div className="">
-            <Link to="/"><h1>{commentary.title}</h1></Link>
+            <h1>{commentary.title}</h1>
+            <h5>{commentary.user.first_name} at {commentary.created_at} </h5>
             <h4>{commentary.content}</h4>
         </div>
     </>

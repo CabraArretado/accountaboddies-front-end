@@ -8,6 +8,7 @@ import API from "../../modules/data_module"
 const NewCommentaryForm = props => {
     let groupId = props.groupId
     let postId = props.postId
+    let getCommentaries = props.getCommentaries
 
     const title = useRef()
     const content = useRef()
@@ -21,8 +22,9 @@ const NewCommentaryForm = props => {
             "group": groupId,
             "post": postId
         }
-        console.log(newCommentary)
         let posted = await API.post("forum_commentary", newCommentary)
+        getCommentaries()
+        props.trigger()
     }
 
     return (
