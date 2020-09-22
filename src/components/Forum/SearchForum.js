@@ -6,8 +6,7 @@ import API from "../../modules/data_module"
 
 // moods
 
-const SearchGroup = React.memo(props => {
-    const getMyGroups = props.getMyGroups
+const SearchForum = React.memo(props => {
 
     // Variables
     const [isLoading, setIsLoading] = useState(false); // Button is loading
@@ -24,17 +23,13 @@ const SearchGroup = React.memo(props => {
 
 
     return <>
-        <div className="container">
-            <h5 className="--page-title">Look for group</h5>
-            <hr />
             <Form onSubmit={search}>
                 <FormGroup className="form-row p-4">
                     <input className="col my-2" type="text" ref={searchInput} name="search-input" id="search-input" placeholder="Search Group" />
-                    <Button disabled={isLoading} className="col" type="submit">Search</Button>
+                    <Button disabled={isLoading} className="col" type="submit">Search Forum Posts</Button>
                 </FormGroup>
             </Form>
-        </div>
     </>
 });
 
-export default SearchGroup;
+export default SearchForum;

@@ -3,10 +3,12 @@ import { Link, Redirect } from "react-router-dom";
 import { Button, Form, Input, FormGroup } from 'reactstrap';
 
 import API from "../../modules/data_module"
+import ForumMain from "../Forum/ForumMain"
 
 // moods
 
 const GroupPage = (props) => {
+    const getMyGroups = props.getMyGroups
     let groupId = props.groupId
     const [ group, setGroup ] = useState({})
 
@@ -17,6 +19,8 @@ const GroupPage = (props) => {
 
     useEffect(()=>{getGroup()},[])
 
+    //TODO: formate the date
+
     return <>
         <div className="container">
             <h1>{group.title}</h1>
@@ -24,6 +28,8 @@ const GroupPage = (props) => {
             <h4>{group.description}</h4>
             <h3>{group.population}/{group.size}</h3>
         </div>
+        <ForumMain groupId={groupId} />
+        <Link to={`/forum/${groupId}`}> Forum </Link>
     </>
 };
 

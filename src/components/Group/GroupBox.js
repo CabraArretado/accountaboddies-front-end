@@ -10,16 +10,14 @@ import JoinGroupButton from "./JoinGroupButton"
 const GroupBox = (props) => {
     let group = props.group
 
-
-    let is_my_group = !props.is_my_group ? props.is_my_group : null
+    const getMyGroups = props.getMyGroups
 
     return <>
         <div className="container">
             <Link to={`groups/${group.id}`}><h1>{group.title}</h1></Link>
             <h4>{group.description}</h4>
             <h3>{group.population}/{group.size}</h3>
-            { is_my_group ? <JoinGroupButton groupId={group.id}/> : null
-            }
+            { props.is_my_group ? null : <JoinGroupButton getMyGroups={getMyGroups} groupId={group.id}/>  }
         </div>
     </>
 };
