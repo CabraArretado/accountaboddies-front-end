@@ -54,8 +54,8 @@ export default {
             },
             body: JSON.stringify(newObj)
         })
-        i = i.json();
-        return i
+        // i = i.json();
+        // return i
     },
 
     // RANDOM ID provider

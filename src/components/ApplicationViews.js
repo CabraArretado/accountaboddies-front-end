@@ -13,6 +13,7 @@ import MyGroups from "./Group/MyGroups"
 import ForumMain from "./Forum/ForumMain"
 import PostDetails from "./Forum/PostDetails"
 import NewPostForm from "./Forum/NewPostForm"
+import TaskMain from "./Task/TaskMain"
 
 const ApplicationViews = props => {
     const props_reference = props
@@ -88,6 +89,19 @@ const ApplicationViews = props => {
 
                     if(myGroupsId.includes(groupId)){
                         return <NewPostForm  {...props_reference} groupId={parseInt(props.match.params.groupId)}/>
+                    } else {
+                        return <Redirect to="/" />
+                    }
+                }}
+            />
+
+            {/* Router for: Forum New Post */}
+            <Route
+                exact path="/tasks/group=:groupId(\d+)/" render={props => {
+                    let groupId = parseInt(props.match.params.groupId)
+
+                    if(myGroupsId.includes(groupId)){
+                        return <TaskMain  {...props_reference} groupId={parseInt(props.match.params.groupId)}/>
                     } else {
                         return <Redirect to="/" />
                     }

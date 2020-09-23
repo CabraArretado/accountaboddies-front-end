@@ -4,6 +4,7 @@ import { Button, Form, Input, FormGroup } from 'reactstrap';
 
 import API from "../../modules/data_module"
 import ForumMain from "../Forum/ForumMain"
+import TaskMain from "../Task/TaskMain"
 
 // moods
 
@@ -30,6 +31,7 @@ const GroupPage = (props) => {
         </div>
         <ForumMain groupId={groupId} />
         <Link to={`/forum/${groupId}`}> Forum </Link>
+        <TaskMain groupId={groupId} />
     </>
 };
 

@@ -15,7 +15,7 @@ const PostBox = (props) => {
 
     return <>
         <div className="container">
-            <Link to="/"><h1>{post.title}</h1></Link>
+            <h1>{post.title}</h1>
             <h4>{post.description}</h4>
         </div>
     </>
